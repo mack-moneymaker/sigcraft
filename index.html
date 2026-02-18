@@ -860,10 +860,25 @@
 
     // --- Signature generation ---
     const SIGCRAFT_BADGE = '<table cellpadding="0" cellspacing="0" style="margin-top:8px;"><tr><td style="font-size:10px;color:#999;font-family:Arial,sans-serif;"><a href="https://mack-moneymaker.github.io/sigcraft/" style="color:#999;text-decoration:none;">Made with SigCraft</a></td></tr></table>';
+    const COPY_COUNT_KEY = 'sigcraft_copy_count';
 
-    function generateSignature() {
+    function getCopyCount() {
+      return parseInt(localStorage.getItem(COPY_COUNT_KEY) || '0', 10);
+    }
+    function incrementCopyCount() {
+      const count = getCopyCount() + 1;
+      localStorage.setItem(COPY_COUNT_KEY, count.toString());
+      return count;
+    }
+
+    function generateSignature(forCopy = false) {
       const raw = generateSignatureRaw();
-      return raw ? raw + SIGCRAFT_BADGE : '';
+      if (!raw) return '';
+      // Show badge only after 2 copies (3rd+ copy gets the badge)
+      if (forCopy && getCopyCount() >= 2) {
+        return raw + SIGCRAFT_BADGE;
+      }
+      return raw;
     }
 
     function generateSignatureRaw() {
@@ -1112,7 +1127,8 @@
     }
 
     async function copySignature() {
-      const html = generateSignature();
+      incrementCopyCount();
+      const html = generateSignature(true);
       if (!html) return;
       try {
         const blob = new Blob([html], { type: 'text/html' });
@@ -1138,7 +1154,8 @@
     }
 
     function copyHTML() {
-      const html = generateSignature();
+      incrementCopyCount();
+      const html = generateSignature(true);
       if (!html) return;
       navigator.clipboard.writeText(html).then(() => {
         showToast('🔧 HTML copied!');
