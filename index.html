@@ -77,7 +77,35 @@
     }
 
     @media (max-width: 768px) {
-      .container { grid-template-columns: 1fr; }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .container > div:last-child {
+        order: -1;
+      }
+      .preview-sticky {
+        position: relative !important;
+        top: auto !important;
+      }
+      .mobile-toggle {
+        display: block !important;
+      }
+    }
+
+    /* Mobile preview toggle */
+    .mobile-toggle {
+      display: none;
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-family: inherit;
     }
 
     /* Cards */
@@ -118,7 +146,11 @@
       font-family: inherit;
       transition: border-color 0.2s;
     }
-    .form-group input:focus, .form-group select:focus {
+    .form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none;
       border-color: var(--primary);
     }
@@ -126,6 +158,12 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
+    }
+    .hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-style: italic;
     }
 
     /* Color picker */
@@ -211,6 +249,15 @@
       background: var(--success);
       color: var(--bg);
     }
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
 
     .actions {
       display: flex;
@@ -267,6 +314,36 @@
       font-size: 1.5rem;
     }
 
+    /* Save/Load bar */
+    .save-bar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .save-bar select {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.5rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+    .save-bar input {
+      flex: 1;
+      min-width: 100px;
+      padding: 0.5rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -318,6 +395,20 @@
   <div class="container">
     <!-- Left: Editor -->
     <div>
+      <!-- Save/Load -->
+      <div class="card" style="margin-bottom: 1rem;">
+        <h2>Saved Signatures</h2>
+        <div class="save-bar">
+          <select id="savedSigs" onchange="loadSavedSignature()">
+            <option value="">— Select saved —</option>
+          </select>
+          <input type="text" id="saveName" placeholder="Signature name…">
+          <button class="btn btn-outline btn-sm" onclick="saveCurrentAs()">💾 Save</button>
+          <button class="btn btn-outline btn-sm" onclick="deleteSaved()">🗑️</button>
+          <button class="btn btn-danger btn-sm" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+
       <div class="card" style="margin-bottom: 1rem;">
         <h2>Template</h2>
         <div class="templates">
@@ -327,6 +418,9 @@
           <button class="template-btn" data-template="bold" onclick="setTemplate('bold')">Bold</button>
           <button class="template-btn" data-template="elegant" onclick="setTemplate('elegant')">Elegant</button>
           <button class="template-btn" data-template="compact" onclick="setTemplate('compact')">Compact</button>
+          <button class="template-btn" data-template="startup" onclick="setTemplate('startup')">🚀 Startup</button>
+          <button class="template-btn" data-template="developer" onclick="setTemplate('developer')">💻 Developer</button>
+          <button class="template-btn" data-template="corporate" onclick="setTemplate('corporate')">🏢 Corporate</button>
         </div>
       </div>
 
@@ -339,12 +433,38 @@
           </div>
           <div style="flex:1">
             <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(this)">
-            <div class="form-group" style="margin-bottom:0">
+            <div class="form-group" style="margin-bottom:0.5rem">
               <label>Photo (optional)</label>
-              <button class="btn btn-outline" style="padding:0.4rem 0.8rem;font-size:0.8rem" onclick="document.getElementById('photoInput').click()">Upload Photo</button>
+              <button class="btn btn-outline btn-sm" onclick="document.getElementById('photoInput').click()">Upload Photo</button>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <input type="url" id="photoUrl" placeholder="https://example.com/photo.jpg" oninput="render()">
+              <div class="hint">Use a hosted URL for better email deliverability</div>
             </div>
           </div>
         </div>
+
+        <!-- Company Logo -->
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+          <div class="photo-upload">
+            <div class="photo-preview" style="border-radius:8px;" onclick="document.getElementById('logoInput').click()">
+              <span id="logoPlaceholder">🏢</span>
+              <img id="logoImg" style="display:none">
+            </div>
+            <div style="flex:1">
+              <input type="file" id="logoInput" accept="image/*" style="display:none" onchange="handleLogo(this)">
+              <div class="form-group" style="margin-bottom:0.5rem">
+                <label>Company Logo (optional)</label>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('logoInput').click()">Upload Logo</button>
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <input type="url" id="logoUrl" placeholder="https://example.com/logo.png" oninput="render()">
+                <div class="hint">Use a hosted URL for better email deliverability</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div style="margin-top:1rem">
           <div class="form-row">
             <div class="form-group">
@@ -405,7 +525,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" style="margin-bottom: 1rem;">
         <h2>Style</h2>
         <div class="color-row">
           <div class="form-group">
@@ -428,12 +548,29 @@
             </select>
           </div>
         </div>
+        <div class="form-group" style="margin-top:0.75rem;">
+          <label>Separator Style</label>
+          <select id="separatorStyle" onchange="render()">
+            <option value="solid">Line</option>
+            <option value="double">Double Line</option>
+            <option value="dashed">Dashed</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>CTA / Disclaimer</h2>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Optional text below signature (legal, CTA, etc.)</label>
+          <textarea id="disclaimer" placeholder="This email and any attachments are confidential…" oninput="render()"></textarea>
+        </div>
       </div>
     </div>
 
     <!-- Right: Preview + Actions -->
     <div>
-      <div class="card" style="position:sticky;top:1rem;">
+      <div class="card preview-sticky" style="position:sticky;top:1rem;">
         <h2>Preview</h2>
         <div class="preview-area" id="preview">
           <p style="color:#94a3b8;text-align:center;padding:2rem 0;">Fill in your details to see your signature</p>
@@ -462,7 +599,7 @@
     </div>
     <div class="faq-item">
       <h3>Can I use my own photo?</h3>
-      <p>Yes — click the photo upload area to add a profile picture. Your photo is embedded directly in the signature as a base64 image, so it works everywhere without external hosting.</p>
+      <p>Yes — upload a photo or paste a hosted image URL. Using a URL is recommended for better email deliverability since base64 images can be large.</p>
     </div>
     <div class="faq-item">
       <h3>Is SigCraft really free?</h3>
@@ -474,7 +611,11 @@
     </div>
     <div class="faq-item">
       <h3>Can I customize colors and fonts?</h3>
-      <p>Yes! Use the Style section to pick your brand colors, text color, and font family. Changes update in real-time in the preview.</p>
+      <p>Yes! Use the Style section to pick your brand colors, text color, font family, and separator style. Changes update in real-time in the preview.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I save multiple signatures?</h3>
+      <p>Yes! Use the "Saved Signatures" section to name and save multiple signatures. Your current signature auto-saves as you type. Switch between saved signatures with the dropdown.</p>
     </div>
   </div>
 
@@ -503,9 +644,15 @@
   <script>
     let currentTemplate = 'classic';
     let photoData = null;
+    let logoData = null;
+
+    const FIELDS = ['name','title','company','department','email','phone','website','linkedin','twitter','github','instagram','primaryColor','textColor','font','photoUrl','logoUrl','separatorStyle','disclaimer'];
+    const STORAGE_KEY = 'sigcraft_current';
+    const SAVED_KEY = 'sigcraft_saved';
 
     function val(id) { return document.getElementById(id).value.trim(); }
 
+    // --- Photo handling ---
     function handlePhoto(input) {
       const file = input.files[0];
       if (!file) return;
@@ -521,13 +668,137 @@
       reader.readAsDataURL(file);
     }
 
-    function setTemplate(t) {
-      currentTemplate = t;
-      document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector(`[data-template="${t}"]`).classList.add('active');
+    function handleLogo(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        logoData = e.target.result;
+        const img = document.getElementById('logoImg');
+        img.src = logoData;
+        img.style.display = 'block';
+        document.getElementById('logoPlaceholder').style.display = 'none';
+        render();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function getPhotoSrc() {
+      const url = val('photoUrl');
+      if (url) return url;
+      return photoData || '';
+    }
+
+    function getLogoSrc() {
+      const url = val('logoUrl');
+      if (url) return url;
+      return logoData || '';
+    }
+
+    // --- Save/Load ---
+    function getState() {
+      const state = { template: currentTemplate };
+      FIELDS.forEach(f => state[f] = document.getElementById(f).value);
+      // Don't save base64 photoData/logoData in auto-save (too large for localStorage)
+      // Only save if it's a URL
+      return state;
+    }
+
+    function applyState(state) {
+      if (!state) return;
+      if (state.template) setTemplate(state.template, true);
+      FIELDS.forEach(f => {
+        if (state[f] !== undefined) document.getElementById(f).value = state[f];
+      });
       render();
     }
 
+    function autoSave() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(getState()));
+      } catch(e) {}
+    }
+
+    function autoLoad() {
+      try {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (data) applyState(JSON.parse(data));
+      } catch(e) {}
+    }
+
+    function saveCurrentAs() {
+      const name = document.getElementById('saveName').value.trim();
+      if (!name) { showToast('⚠️ Enter a name first'); return; }
+      const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+      saved[name] = getState();
+      localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+      document.getElementById('saveName').value = '';
+      refreshSavedList();
+      showToast('💾 Saved: ' + name);
+    }
+
+    function loadSavedSignature() {
+      const sel = document.getElementById('savedSigs');
+      const name = sel.value;
+      if (!name) return;
+      const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+      if (saved[name]) applyState(saved[name]);
+    }
+
+    function deleteSaved() {
+      const sel = document.getElementById('savedSigs');
+      const name = sel.value;
+      if (!name) { showToast('⚠️ Select a signature to delete'); return; }
+      const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+      delete saved[name];
+      localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+      refreshSavedList();
+      showToast('🗑️ Deleted: ' + name);
+    }
+
+    function refreshSavedList() {
+      const sel = document.getElementById('savedSigs');
+      const saved = JSON.parse(localStorage.getItem(SAVED_KEY) || '{}');
+      sel.innerHTML = '<option value="">— Select saved —</option>';
+      Object.keys(saved).forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        sel.appendChild(opt);
+      });
+    }
+
+    function resetAll() {
+      if (!confirm('Reset all fields?')) return;
+      FIELDS.forEach(f => {
+        const el = document.getElementById(f);
+        if (f === 'primaryColor') el.value = '#6366f1';
+        else if (f === 'textColor') el.value = '#1a1a1a';
+        else if (f === 'font') el.value = 'Arial, sans-serif';
+        else if (f === 'separatorStyle') el.value = 'solid';
+        else el.value = '';
+      });
+      photoData = null;
+      logoData = null;
+      document.getElementById('photoImg').style.display = 'none';
+      document.getElementById('photoPlaceholder').style.display = '';
+      document.getElementById('logoImg').style.display = 'none';
+      document.getElementById('logoPlaceholder').style.display = '';
+      setTemplate('classic');
+      autoSave();
+      showToast('🔄 Reset!');
+    }
+
+    // --- Template ---
+    function setTemplate(t, skipRender) {
+      currentTemplate = t;
+      document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+      const btn = document.querySelector(`[data-template="${t}"]`);
+      if (btn) btn.classList.add('active');
+      if (!skipRender) render();
+    }
+
+    // --- Social icons ---
     function socialIcon(url, platform, color) {
       if (!url) return '';
       const icons = {
@@ -539,6 +810,35 @@
       return `<a href="${url}" target="_blank" style="display:inline-block;margin-right:6px;text-decoration:none;">${icons[platform]}</a>`;
     }
 
+    // --- Separator ---
+    function getDivider(color, template) {
+      const style = val('separatorStyle') || document.getElementById('separatorStyle').value;
+      if (style === 'none') return '';
+      let borderStyle = 'solid';
+      let borderWidth = template === 'bold' ? '3' : '1';
+      if (style === 'double') { borderStyle = 'double'; borderWidth = '3'; }
+      if (style === 'dashed') borderStyle = 'dashed';
+      return `<tr><td colspan="2" style="padding-top:10px;padding-bottom:10px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:${borderWidth}px ${borderStyle} ${color};font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>`;
+    }
+
+    // --- Disclaimer ---
+    function getDisclaimer() {
+      const text = val('disclaimer');
+      if (!text) return '';
+      return `<tr><td colspan="2" style="padding-top:12px;font-size:11px;color:#999;font-family:Arial,sans-serif;line-height:1.4;">${text.replace(/\n/g, '<br>')}</td></tr>`;
+    }
+
+    // --- Logo HTML ---
+    function getLogoHtml(position) {
+      const src = getLogoSrc();
+      if (!src) return '';
+      if (position === 'cell') {
+        return `<td style="vertical-align:top;padding-left:16px;"><img src="${src}" height="40" style="display:block;max-width:120px;height:auto;max-height:40px;" alt="Logo"></td>`;
+      }
+      return `<tr><td style="padding-top:8px;"><img src="${src}" height="35" style="display:block;max-width:120px;height:auto;max-height:35px;" alt="Logo"></td></tr>`;
+    }
+
+    // --- Signature generation ---
     function generateSignature() {
       const name = val('name');
       if (!name) return '';
@@ -556,6 +856,8 @@
       const color = document.getElementById('primaryColor').value;
       const textCol = document.getElementById('textColor').value;
       const font = document.getElementById('font').value;
+      const photoSrc = getPhotoSrc();
+      const logoSrc = getLogoSrc();
 
       const hasSocial = linkedin || twitter || github || instagram;
       const socials = hasSocial ? `
@@ -566,12 +868,14 @@
           ${socialIcon(instagram, 'instagram', color)}
         </td></tr>` : '';
 
-      const photoCell = photoData ? `
+      const photoSize = currentTemplate === 'compact' ? 50 : 70;
+      const photoRadius = (currentTemplate === 'modern' || currentTemplate === 'bold' || currentTemplate === 'startup') ? '8px' : '50%';
+      const photoCell = photoSrc ? `
         <td style="vertical-align:top;padding-right:${currentTemplate === 'minimal' ? '12' : '16'}px;">
-          <img src="${photoData}" width="${currentTemplate === 'compact' ? 50 : 70}" height="${currentTemplate === 'compact' ? 50 : 70}" style="border-radius:${currentTemplate === 'modern' || currentTemplate === 'bold' ? '8px' : '50%'};object-fit:cover;display:block;" alt="${name}">
+          <img src="${photoSrc}" width="${photoSize}" height="${photoSize}" style="border-radius:${photoRadius};object-fit:cover;display:block;" alt="${name}">
         </td>` : '';
 
-      const divider = `<tr><td colspan="2" style="padding-top:10px;padding-bottom:10px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:${currentTemplate === 'bold' ? '3' : '1'}px solid ${color};font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>`;
+      const divider = getDivider(color, currentTemplate);
 
       const contactLine = [email, phone].filter(Boolean);
       const contactHtml = contactLine.length ? `<tr><td style="font-size:13px;color:${textCol};font-family:${font};padding-top:4px;">
@@ -584,7 +888,9 @@
         <a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a>
       </td></tr>` : '';
 
-      // Template-specific rendering
+      const disclaimer = getDisclaimer();
+
+      // --- MINIMAL ---
       if (currentTemplate === 'minimal') {
         return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};">
           <tr>
@@ -595,11 +901,14 @@
               ${contactLine.length || website ? `<br><span style="font-size:12px;color:#888;">` +
                 [email ? `<a href="mailto:${email}" style="color:${color};text-decoration:none;">${email}</a>` : '', phone, website ? `<a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a>` : ''].filter(Boolean).join(' · ') +
                 `</span>` : ''}
+              ${logoSrc ? `<br><img src="${logoSrc}" height="25" style="margin-top:6px;max-width:80px;height:auto;max-height:25px;" alt="Logo">` : ''}
             </td>
           </tr>
+          ${disclaimer}
         </table>`;
       }
 
+      // --- BOLD ---
       if (currentTemplate === 'bold') {
         return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};">
           <tr>
@@ -613,12 +922,15 @@
                 ${contactHtml}
                 ${websiteHtml}
                 ${socials}
+                ${getLogoHtml('row')}
               </table>
             </td>
           </tr>
+          ${disclaimer}
         </table>`;
       }
 
+      // --- ELEGANT ---
       if (currentTemplate === 'elegant') {
         return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};border-left:3px solid ${color};padding-left:14px;">
           <tr>
@@ -632,12 +944,15 @@
                 </td></tr>
                 ${websiteHtml}
                 ${socials}
+                ${getLogoHtml('row')}
               </table>
             </td>
           </tr>
+          ${disclaimer}
         </table>`;
       }
 
+      // --- COMPACT ---
       if (currentTemplate === 'compact') {
         return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};font-size:12px;">
           <tr>
@@ -647,11 +962,90 @@
               ${[email ? `<a href="mailto:${email}" style="color:${color};text-decoration:none;">${email}</a>` : '', phone, website ? `<a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a>` : ''].filter(Boolean).join(' | ')}
               ${hasSocial ? `<br>${socialIcon(linkedin, 'linkedin', color)}${socialIcon(twitter, 'twitter', color)}${socialIcon(github, 'github', color)}${socialIcon(instagram, 'instagram', color)}` : ''}
             </td>
+            ${logoSrc ? `<td style="vertical-align:middle;padding-left:12px;"><img src="${logoSrc}" height="30" style="max-width:80px;height:auto;max-height:30px;" alt="Logo"></td>` : ''}
           </tr>
+          ${disclaimer}
         </table>`;
       }
 
-      // Classic & Modern (default)
+      // --- STARTUP ---
+      if (currentTemplate === 'startup') {
+        return `<table cellpadding="0" cellspacing="0" style="font-family:'Trebuchet MS',Arial,sans-serif;color:${textCol};background:linear-gradient(135deg,#fdf2f8,#ede9fe,#e0f2fe);border-radius:12px;padding:16px;">
+          <tr>
+            ${photoSrc ? `<td style="vertical-align:top;padding-right:14px;">
+              <img src="${photoSrc}" width="65" height="65" style="border-radius:16px;object-fit:cover;display:block;border:3px solid ${color};" alt="${name}">
+            </td>` : ''}
+            <td style="vertical-align:top;">
+              <table cellpadding="0" cellspacing="0">
+                <tr><td style="font-size:18px;font-weight:800;color:${color};font-family:'Trebuchet MS',Arial,sans-serif;">${name} ✨</td></tr>
+                ${title ? `<tr><td style="font-size:13px;color:#7c3aed;font-family:'Trebuchet MS',Arial,sans-serif;padding-top:2px;">${title}</td></tr>` : ''}
+                ${company ? `<tr><td style="font-size:13px;color:#666;font-family:'Trebuchet MS',Arial,sans-serif;"><span style="background:${color};color:white;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;">${company}</span>${dept ? ` · ${dept}` : ''}</td></tr>` : ''}
+                <tr><td style="padding-top:6px;padding-bottom:6px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:2px dashed ${color};opacity:0.4;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+                ${contactHtml}
+                ${websiteHtml}
+                ${socials}
+                ${getLogoHtml('row')}
+              </table>
+            </td>
+          </tr>
+          ${disclaimer}
+        </table>`;
+      }
+
+      // --- DEVELOPER ---
+      if (currentTemplate === 'developer') {
+        const devFont = "'Courier New',Consolas,monospace";
+        const termDivider = `<tr><td style="padding-top:8px;padding-bottom:8px;font-family:${devFont};font-size:11px;color:#666;letter-spacing:2px;">// ─────────────────</td></tr>`;
+        return `<table cellpadding="0" cellspacing="0" style="font-family:${devFont};color:${textCol};background:#fafafa;border:1px solid #e2e8f0;border-radius:4px;padding:14px;">
+          <tr>
+            ${photoSrc ? `<td style="vertical-align:top;padding-right:14px;">
+              <img src="${photoSrc}" width="60" height="60" style="border-radius:4px;object-fit:cover;display:block;border:2px solid #e2e8f0;" alt="${name}">
+            </td>` : ''}
+            <td style="vertical-align:top;">
+              <table cellpadding="0" cellspacing="0">
+                <tr><td style="font-size:16px;font-weight:bold;color:${textCol};font-family:${devFont};"><span style="color:#666;">$</span> ${name}</td></tr>
+                ${title ? `<tr><td style="font-size:12px;color:${color};font-family:${devFont};padding-top:2px;"><span style="color:#999;">→</span> ${title}</td></tr>` : ''}
+                ${company ? `<tr><td style="font-size:12px;color:#666;font-family:${devFont};"><span style="color:#999;">@</span> ${[company, dept].filter(Boolean).join(' / ')}</td></tr>` : ''}
+                ${termDivider}
+                ${email ? `<tr><td style="font-size:12px;font-family:${devFont};padding-top:2px;"><span style="color:#999;">✉</span> <a href="mailto:${email}" style="color:${color};text-decoration:none;">${email}</a></td></tr>` : ''}
+                ${phone ? `<tr><td style="font-size:12px;font-family:${devFont};padding-top:1px;"><span style="color:#999;">☎</span> ${phone}</td></tr>` : ''}
+                ${website ? `<tr><td style="font-size:12px;font-family:${devFont};padding-top:1px;"><span style="color:#999;">⌂</span> <a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a></td></tr>` : ''}
+                ${github ? `<tr><td style="font-size:12px;font-family:${devFont};padding-top:1px;"><span style="color:#999;">⚡</span> <a href="${github}" style="color:${color};text-decoration:none;">${github.replace(/^https?:\/\/(www\.)?github\.com\//, 'github.com/')}</a></td></tr>` : ''}
+                ${(linkedin || twitter || instagram) ? `<tr><td style="padding-top:6px;">${socialIcon(linkedin, 'linkedin', color)}${socialIcon(twitter, 'twitter', color)}${socialIcon(instagram, 'instagram', color)}</td></tr>` : ''}
+                ${getLogoHtml('row')}
+              </table>
+            </td>
+          </tr>
+          ${disclaimer}
+        </table>`;
+      }
+
+      // --- CORPORATE ---
+      if (currentTemplate === 'corporate') {
+        const corpFont = "Georgia,'Times New Roman',serif";
+        return `<table cellpadding="0" cellspacing="0" style="font-family:${corpFont};color:${textCol};border-top:3px solid ${color};padding-top:12px;">
+          <tr>
+            ${photoSrc ? `<td style="vertical-align:top;padding-right:16px;">
+              <img src="${photoSrc}" width="75" height="75" style="border-radius:0;object-fit:cover;display:block;" alt="${name}">
+            </td>` : ''}
+            <td style="vertical-align:top;">
+              <table cellpadding="0" cellspacing="0">
+                <tr><td style="font-size:17px;font-weight:bold;color:${textCol};font-family:${corpFont};letter-spacing:0.5px;">${name}</td></tr>
+                ${title ? `<tr><td style="font-size:13px;color:${color};font-family:${corpFont};padding-top:3px;text-transform:uppercase;letter-spacing:0.5px;font-size:11px;">${title}</td></tr>` : ''}
+                ${company ? `<tr><td style="font-size:13px;color:#555;font-family:${corpFont};padding-top:1px;">${company}${dept ? ` — ${dept}` : ''}</td></tr>` : ''}
+                <tr><td style="padding-top:8px;padding-bottom:8px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-bottom:1px solid #ccc;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+                ${contactHtml}
+                ${websiteHtml}
+                ${socials}
+              </table>
+            </td>
+            ${logoSrc ? `<td style="vertical-align:top;padding-left:20px;"><img src="${logoSrc}" height="50" style="display:block;max-width:140px;height:auto;max-height:50px;" alt="Logo"></td>` : ''}
+          </tr>
+          ${disclaimer}
+        </table>`;
+      }
+
+      // --- CLASSIC & MODERN (default) ---
       return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};">
         <tr>
           ${photoCell}
@@ -664,9 +1058,11 @@
               ${contactHtml}
               ${websiteHtml}
               ${socials}
+              ${getLogoHtml('row')}
             </table>
           </td>
         </tr>
+        ${disclaimer}
       </table>`;
     }
 
@@ -678,6 +1074,7 @@
       } else {
         preview.innerHTML = '<p style="color:#94a3b8;text-align:center;padding:2rem 0;">Fill in your details to see your signature</p>';
       }
+      autoSave();
     }
 
     function showToast(msg) {
@@ -722,6 +1119,8 @@
     }
 
     // Init
+    refreshSavedList();
+    autoLoad();
     render();
   </script>
 
