@@ -390,6 +390,7 @@
   <header>
     <h1>✉️ SigCraft</h1>
     <p>Create a beautiful, professional email signature in seconds. Free forever, no signup.</p>
+    <a href="https://ko-fi.com/mackmoneymaker" target="_blank" style="display:inline-block;margin-top:1rem;padding:0.5rem 1.2rem;background:#334155;color:#f1f5f9;border:1px solid #475569;border-radius:8px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s;">☕ Buy me a coffee</a>
   </header>
 
   <div class="container">
@@ -583,6 +584,25 @@
           <strong>How to use:</strong> Click "Copy to Clipboard", then paste into your email client's signature settings (Gmail → Settings → Signature, Outlook → Settings → Compose → Email Signature).
         </p>
       </div>
+
+      <!-- Ad Slot -->
+      <div style="margin-top:1rem;background:var(--bg-card);border:1px dashed var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center;">
+        <div>
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">📣 Your ad here — reach 1,000+ developers weekly</p>
+          <a href="mailto:openclaw.lerso.moneymaker@gmail.com?subject=SigCraft%20Advertising" style="color:var(--primary);font-size:0.8rem;text-decoration:none;">Get in touch →</a>
+        </div>
+      </div>
+
+      <!-- SigCraft Pro Teaser -->
+      <div style="margin-top:1rem;background:linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+          <span style="font-size:1.1rem;">✨</span>
+          <strong style="color:var(--text);font-size:1rem;">SigCraft Pro</strong>
+          <span style="background:var(--primary);color:white;font-size:0.65rem;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Coming Soon</span>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Remove branding · Click analytics · Team signatures · Premium templates</p>
+        <a href="mailto:openclaw.lerso.moneymaker@gmail.com?subject=SigCraft%20Pro%20Waitlist" style="display:inline-block;padding:0.4rem 1rem;background:transparent;border:1px solid var(--primary);color:var(--primary);border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:500;">Join waitlist →</a>
+      </div>
     </div>
   </div>
 
@@ -636,7 +656,7 @@
 
   <footer>
     <p>Built with ❤️ by <a href="https://rendly-api.fly.dev" target="_blank">Rendly</a> — the screenshot & OG image API for developers.</p>
-    <p style="margin-top:0.5rem;">No data is stored. Everything runs in your browser. <a href="https://github.com/mack-moneymaker/sigcraft">Open Source</a>.</p>
+    <p style="margin-top:0.5rem;">No data is stored. Everything runs in your browser. <a href="https://github.com/mack-moneymaker/sigcraft">Open Source</a>. <a href="https://ko-fi.com/mackmoneymaker" target="_blank" style="text-decoration:none;" title="Buy me a coffee">☕</a></p>
   </footer>
 
   <div class="toast" id="toast">✅ Copied to clipboard!</div>
@@ -839,7 +859,14 @@
     }
 
     // --- Signature generation ---
+    const SIGCRAFT_BADGE = '<table cellpadding="0" cellspacing="0" style="margin-top:8px;"><tr><td style="font-size:10px;color:#999;font-family:Arial,sans-serif;"><a href="https://mack-moneymaker.github.io/sigcraft/" style="color:#999;text-decoration:none;">Made with SigCraft</a></td></tr></table>';
+
     function generateSignature() {
+      const raw = generateSignatureRaw();
+      return raw ? raw + SIGCRAFT_BADGE : '';
+    }
+
+    function generateSignatureRaw() {
       const name = val('name');
       if (!name) return '';
 
