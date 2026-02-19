@@ -357,6 +357,197 @@
       text-decoration: none;
     }
 
+    /* Pro badge */
+    .pro-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+    .pro-badge-hidden { display: none; }
+
+    /* Pro lock overlay on template buttons */
+    .template-btn .pro-lock {
+      font-size: 0.65rem;
+      display: block;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .template-btn.pro-locked {
+      opacity: 0.6;
+      position: relative;
+    }
+    .template-btn.pro-locked:hover {
+      border-color: var(--accent);
+    }
+
+    /* Pricing section */
+    .pricing-section {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .pricing-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-section .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .pricing-toggle {
+      display: inline-flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px;
+      margin-bottom: 2rem;
+    }
+    .pricing-toggle button {
+      padding: 0.5rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .pricing-toggle button.active {
+      background: var(--primary);
+      color: white;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      .pricing-cards { grid-template-columns: 1fr; }
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: '✨ Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pricing-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-card .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .pricing-card .price-period {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .pricing-card .savings {
+      display: inline-block;
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+    .pricing-card ul {
+      list-style: none;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .pricing-card li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 0.35rem 0;
+    }
+    .pricing-card li::before {
+      content: '✓ ';
+      color: var(--success);
+      font-weight: 700;
+    }
+    .pricing-card .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Pro modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;left: 0;right: 0;bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+    }
+    .modal-box h3 { margin-bottom: 1rem; font-size: 1.3rem; }
+    .modal-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    .modal-box input {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      margin-bottom: 1rem;
+    }
+    .modal-box .modal-actions { display: flex; gap: 0.75rem; justify-content: center; }
+
+    /* Pro field gating */
+    .pro-gated { display: none; }
+    .pro-active .pro-gated { display: block; }
+
     /* FAQ */
     .faq {
       max-width: 800px;
@@ -388,7 +579,7 @@
 </head>
 <body>
   <header>
-    <h1>✉️ SigCraft</h1>
+    <h1>✉️ SigCraft<span class="pro-badge pro-badge-hidden" id="proBadge">PRO</span></h1>
     <p>Create a beautiful, professional email signature in seconds. Free forever, no signup.</p>
     <a href="https://ko-fi.com/lerso" target="_blank" style="display:inline-block;margin-top:1rem;padding:0.5rem 1.2rem;background:#334155;color:#f1f5f9;border:1px solid #475569;border-radius:8px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s;">☕ Buy me a coffee</a>
   </header>
@@ -416,12 +607,12 @@
           <button class="template-btn active" data-template="classic" onclick="setTemplate('classic')">Classic</button>
           <button class="template-btn" data-template="modern" onclick="setTemplate('modern')">Modern</button>
           <button class="template-btn" data-template="minimal" onclick="setTemplate('minimal')">Minimal</button>
-          <button class="template-btn" data-template="bold" onclick="setTemplate('bold')">Bold</button>
-          <button class="template-btn" data-template="elegant" onclick="setTemplate('elegant')">Elegant</button>
-          <button class="template-btn" data-template="compact" onclick="setTemplate('compact')">Compact</button>
-          <button class="template-btn" data-template="startup" onclick="setTemplate('startup')">🚀 Startup</button>
-          <button class="template-btn" data-template="developer" onclick="setTemplate('developer')">💻 Developer</button>
-          <button class="template-btn" data-template="corporate" onclick="setTemplate('corporate')">🏢 Corporate</button>
+          <button class="template-btn pro-locked" data-template="bold" onclick="setTemplate('bold')">Bold<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="elegant" onclick="setTemplate('elegant')">Elegant<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="compact" onclick="setTemplate('compact')">Compact<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="startup" onclick="setTemplate('startup')">🚀 Startup<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="developer" onclick="setTemplate('developer')">💻 Developer<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="corporate" onclick="setTemplate('corporate')">🏢 Corporate<span class="pro-lock">🔒 Pro</span></button>
         </div>
       </div>
 
@@ -567,6 +758,39 @@
           <textarea id="disclaimer" placeholder="This email and any attachments are confidential…" oninput="render()"></textarea>
         </div>
       </div>
+
+      <!-- Pro: Custom Banner/CTA -->
+      <div class="card pro-gated" style="margin-top: 1rem;">
+        <h2>✨ Pro: Banner / CTA</h2>
+        <div class="form-group">
+          <label>Banner Text</label>
+          <input type="text" id="bannerText" placeholder="🚀 We're hiring! Check out our open roles" oninput="render()">
+        </div>
+        <div class="form-group">
+          <label>Banner Link</label>
+          <input type="url" id="bannerUrl" placeholder="https://yourcompany.com/careers" oninput="render()">
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Banner Style</label>
+          <select id="bannerStyle" onchange="render()">
+            <option value="subtle">Subtle</option>
+            <option value="pill">Pill</option>
+            <option value="box">Box</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Pro: Analytics Info -->
+      <div class="card pro-gated" style="margin-top: 1rem;">
+        <h2>✨ Pro: Click Analytics</h2>
+        <div class="form-group" style="margin-bottom:0.5rem">
+          <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;">
+            <input type="checkbox" id="analyticsEnabled" onchange="render()" style="width:auto;">
+            Enable link click tracking
+          </label>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-muted);">When enabled, signature links will use redirect URLs for click tracking. You'll be able to see how many people click your links. <em>(Full analytics dashboard coming soon)</em></p>
+      </div>
     </div>
 
     <!-- Right: Preview + Actions -->
@@ -593,15 +817,69 @@
         </div>
       </div>
 
-      <!-- SigCraft Pro Teaser -->
-      <div style="margin-top:1rem;background:linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+      <!-- SigCraft Pro CTA (sidebar) -->
+      <div id="proSidebarCta" style="margin-top:1rem;background:linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
         <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
           <span style="font-size:1.1rem;">✨</span>
-          <strong style="color:var(--text);font-size:1rem;">SigCraft Pro</strong>
-          <span style="background:var(--primary);color:white;font-size:0.65rem;padding:2px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Coming Soon</span>
+          <strong style="color:var(--text);font-size:1rem;">Unlock SigCraft Pro</strong>
         </div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Remove branding · Click analytics · Team signatures · Premium templates</p>
-        <a href="mailto:openclaw.lerso.moneymaker@gmail.com?subject=SigCraft%20Pro%20Waitlist" style="display:inline-block;padding:0.4rem 1rem;background:transparent;border:1px solid var(--primary);color:var(--primary);border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:500;">Join waitlist →</a>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Remove branding · 6 premium templates · Custom banners · Click analytics</p>
+        <a href="#pricing" style="display:inline-block;padding:0.4rem 1rem;background:var(--primary);color:white;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;">See pricing →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="pricing-section" id="pricing">
+    <h2>Upgrade to <span style="background:linear-gradient(135deg, var(--primary), var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">SigCraft Pro</span></h2>
+    <p class="subtitle">Everything in Free, plus powerful features for professionals.</p>
+    <div class="pricing-toggle">
+      <button class="active" onclick="setPricingPeriod('monthly')">Monthly</button>
+      <button onclick="setPricingPeriod('yearly')">Yearly</button>
+    </div>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <div class="price-period">forever</div>
+        <ul>
+          <li>3 signature templates</li>
+          <li>Unlimited signatures</li>
+          <li>All social icons</li>
+          <li>Custom colors & fonts</li>
+          <li>Photo & logo upload</li>
+          <li>Save & load signatures</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;" disabled>Current Plan</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <div class="price" id="proPrice">$5</div>
+        <div class="price-period" id="proPeriod">/month</div>
+        <div class="savings" id="proSavings" style="display:none">Save 52% vs monthly</div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>9 premium templates</li>
+          <li>No "Made with SigCraft" badge</li>
+          <li>Custom banner / CTA</li>
+          <li>Click analytics tracking</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#stripe-monthly" id="proCheckoutBtn" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Get Pro →</a>
+      </div>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:1.5rem;">Already purchased? <a href="#" onclick="showProModal();return false;" style="color:var(--primary);">Activate Pro →</a></p>
+  </div>
+
+  <!-- Pro Activation Modal -->
+  <div class="modal-overlay" id="proModal">
+    <div class="modal-box">
+      <h3>✨ Activate SigCraft Pro</h3>
+      <p>Enter the email you used for your purchase to activate Pro features.</p>
+      <input type="email" id="proEmail" placeholder="you@example.com">
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="hideProModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="activatePro()">Activate</button>
       </div>
     </div>
   </div>
@@ -623,7 +901,7 @@
     </div>
     <div class="faq-item">
       <h3>Is SigCraft really free?</h3>
-      <p>Yes, 100% free with no signup, no watermark, and no limits. Your data stays in your browser — we don't store anything on our servers.</p>
+      <p>Yes! The free tier includes 3 templates, unlimited signatures, and all core features. SigCraft Pro ($5/mo) adds premium templates, removes the small branding badge, and unlocks custom banners and click analytics.</p>
     </div>
     <div class="faq-item">
       <h3>Why does my signature look different in some email clients?</h3>
@@ -666,9 +944,81 @@
     let photoData = null;
     let logoData = null;
 
-    const FIELDS = ['name','title','company','department','email','phone','website','linkedin','twitter','github','instagram','primaryColor','textColor','font','photoUrl','logoUrl','separatorStyle','disclaimer'];
+    const FIELDS = ['name','title','company','department','email','phone','website','linkedin','twitter','github','instagram','primaryColor','textColor','font','photoUrl','logoUrl','separatorStyle','disclaimer','bannerText','bannerUrl','bannerStyle'];
     const STORAGE_KEY = 'sigcraft_current';
     const SAVED_KEY = 'sigcraft_saved';
+    const PRO_KEY = 'sigcraft_pro';
+    const PRO_TEMPLATES = ['bold','elegant','compact','startup','developer','corporate'];
+
+    // --- Pro status ---
+    function isPro() {
+      return localStorage.getItem(PRO_KEY) === 'activated';
+    }
+
+    function applyProState() {
+      const pro = isPro();
+      document.body.classList.toggle('pro-active', pro);
+      document.getElementById('proBadge').classList.toggle('pro-badge-hidden', !pro);
+      const sidebar = document.getElementById('proSidebarCta');
+      if (sidebar) sidebar.style.display = pro ? 'none' : '';
+      // Unlock/lock template buttons
+      document.querySelectorAll('.template-btn.pro-locked').forEach(btn => {
+        if (pro) {
+          btn.classList.remove('pro-locked');
+          const lock = btn.querySelector('.pro-lock');
+          if (lock) lock.style.display = 'none';
+        }
+      });
+    }
+
+    function showProModal() {
+      document.getElementById('proModal').classList.add('show');
+    }
+    function hideProModal() {
+      document.getElementById('proModal').classList.remove('show');
+    }
+
+    function activatePro() {
+      const email = document.getElementById('proEmail').value.trim();
+      if (!email) { showToast('⚠️ Enter your email'); return; }
+      localStorage.setItem(PRO_KEY, 'activated');
+      localStorage.setItem('sigcraft_pro_email', email);
+      hideProModal();
+      applyProState();
+      render();
+      showToast('✨ Pro activated! Enjoy your premium features.');
+    }
+
+    function checkProRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('pro') === 'activated') {
+        localStorage.setItem(PRO_KEY, 'activated');
+        window.history.replaceState({}, '', window.location.pathname);
+        applyProState();
+        showToast('✨ Pro activated! Welcome to SigCraft Pro.');
+      }
+    }
+
+    function setPricingPeriod(period) {
+      const btns = document.querySelectorAll('.pricing-toggle button');
+      btns.forEach(b => b.classList.remove('active'));
+      btns[period === 'monthly' ? 0 : 1].classList.add('active');
+      const priceEl = document.getElementById('proPrice');
+      const periodEl = document.getElementById('proPeriod');
+      const savingsEl = document.getElementById('proSavings');
+      const checkoutBtn = document.getElementById('proCheckoutBtn');
+      if (period === 'yearly') {
+        priceEl.textContent = '$29';
+        periodEl.textContent = '/year';
+        savingsEl.style.display = '';
+        checkoutBtn.href = '#stripe-yearly';
+      } else {
+        priceEl.textContent = '$5';
+        periodEl.textContent = '/month';
+        savingsEl.style.display = 'none';
+        checkoutBtn.href = '#stripe-monthly';
+      }
+    }
 
     function val(id) { return document.getElementById(id).value.trim(); }
 
@@ -811,6 +1161,10 @@
 
     // --- Template ---
     function setTemplate(t, skipRender) {
+      if (PRO_TEMPLATES.includes(t) && !isPro()) {
+        showProModal();
+        return;
+      }
       currentTemplate = t;
       document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
       const btn = document.querySelector(`[data-template="${t}"]`);
@@ -859,26 +1213,42 @@
     }
 
     // --- Signature generation ---
-    const SIGCRAFT_BADGE = '<table cellpadding="0" cellspacing="0" style="margin-top:8px;"><tr><td style="font-size:10px;color:#999;font-family:Arial,sans-serif;"><a href="https://mack-moneymaker.github.io/sigcraft/" style="color:#999;text-decoration:none;">Made with SigCraft</a></td></tr></table>';
-    const COPY_COUNT_KEY = 'sigcraft_copy_count';
-
-    function getCopyCount() {
-      return parseInt(localStorage.getItem(COPY_COUNT_KEY) || '0', 10);
-    }
-    function incrementCopyCount() {
-      const count = getCopyCount() + 1;
-      localStorage.setItem(COPY_COUNT_KEY, count.toString());
-      return count;
-    }
+    const SIGCRAFT_BADGE = '<table cellpadding="0" cellspacing="0" style="margin-top:8px;"><tr><td style="font-size:10px;color:#aaa;font-family:Arial,sans-serif;"><a href="https://sigcraft.dev" style="color:#aaa;text-decoration:none;">Made with ✉️ SigCraft</a></td></tr></table>';
 
     function generateSignature(forCopy = false) {
       const raw = generateSignatureRaw();
       if (!raw) return '';
-      // Show badge only after 2 copies (3rd+ copy gets the badge)
-      if (forCopy && getCopyCount() >= 2) {
-        return raw + SIGCRAFT_BADGE;
+      let result = raw + getBannerHtml();
+      // Pro users: no badge. Free users: always show badge.
+      if (!isPro()) {
+        result += SIGCRAFT_BADGE;
       }
-      return raw;
+      return result;
+    }
+
+    function getBannerHtml() {
+      if (!isPro()) return '';
+      const text = val('bannerText');
+      if (!text) return '';
+      const url = val('bannerUrl');
+      const style = document.getElementById('bannerStyle').value;
+      let inner = text;
+      if (url) inner = `<a href="${url}" style="color:inherit;text-decoration:none;">${text}</a>`;
+
+      if (style === 'pill') {
+        return `<table cellpadding="0" cellspacing="0" style="margin-top:10px;"><tr><td style="background:#6366f1;color:white;font-size:12px;font-family:Arial,sans-serif;padding:5px 14px;border-radius:20px;font-weight:600;">${inner}</td></tr></table>`;
+      }
+      if (style === 'box') {
+        return `<table cellpadding="0" cellspacing="0" style="margin-top:10px;width:100%;"><tr><td style="background:#f0f0ff;border:1px solid #e0e0ff;color:#4338ca;font-size:12px;font-family:Arial,sans-serif;padding:8px 12px;border-radius:6px;">${inner}</td></tr></table>`;
+      }
+      // subtle
+      return `<table cellpadding="0" cellspacing="0" style="margin-top:8px;"><tr><td style="font-size:11px;color:#666;font-family:Arial,sans-serif;">${inner}</td></tr></table>`;
+    }
+
+    function getAnalyticsUrl(url) {
+      if (!isPro() || !document.getElementById('analyticsEnabled').checked) return url;
+      // Wrap URL with tracking redirect (placeholder)
+      return `https://sigcraft.dev/t/?url=${encodeURIComponent(url)}`;
     }
 
     function generateSignatureRaw() {
@@ -1127,7 +1497,6 @@
     }
 
     async function copySignature() {
-      incrementCopyCount();
       const html = generateSignature(true);
       if (!html) return;
       try {
@@ -1154,7 +1523,6 @@
     }
 
     function copyHTML() {
-      incrementCopyCount();
       const html = generateSignature(true);
       if (!html) return;
       navigator.clipboard.writeText(html).then(() => {
@@ -1163,6 +1531,8 @@
     }
 
     // Init
+    checkProRedirect();
+    applyProState();
     refreshSavedList();
     autoLoad();
     render();
