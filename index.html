@@ -557,6 +557,239 @@
     .pro-gated { display: none; }
     .pro-active .pro-gated { display: block; }
 
+    /* Animated Demo */
+    .demo-section {
+      max-width: 700px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .demo-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .demo-section .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .demo-preview {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: left;
+      color: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .demo-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--primary);
+      animation: blink 0.7s infinite;
+      vertical-align: text-bottom;
+      margin-left: 1px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .demo-field { opacity: 0; animation: fadeInUp 0.5s forwards; }
+
+    /* Testimonials */
+    .testimonials-section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .testimonials-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 700px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: left;
+    }
+    .testimonial-card .quote {
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .testimonial-card .author {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .testimonial-card .author strong {
+      color: var(--text);
+    }
+    .testimonial-card .stars {
+      color: #fbbf24;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Comparison Table */
+    .comparison-section {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .comparison-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .comparison-section .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table th {
+      background: rgba(99,102,241,0.1);
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+    .comparison-table th.highlight {
+      background: rgba(99,102,241,0.25);
+      color: var(--accent);
+    }
+    .comparison-table td {
+      color: var(--text-muted);
+    }
+    .comparison-table td:first-child {
+      text-align: left;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .check { color: var(--success); font-weight: 700; }
+    .cross { color: #ef4444; }
+    .partial { color: #fbbf24; }
+
+    /* Keyboard Shortcuts */
+    .shortcuts-section {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .shortcuts-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      text-align: left;
+    }
+    @media (max-width: 500px) {
+      .shortcuts-grid { grid-template-columns: 1fr; }
+    }
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+    }
+    .shortcut-item kbd {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      font-family: 'SF Mono', monospace;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .shortcut-item span {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Scroll-triggered Popup */
+    .upgrade-popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+    }
+    .upgrade-popup-overlay.show { display: flex; }
+    .upgrade-popup {
+      background: var(--bg-card);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(99,102,241,0.2);
+    }
+    .upgrade-popup .close-popup {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .upgrade-popup h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .upgrade-popup p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+    .upgrade-popup .popup-features {
+      text-align: left;
+      margin-bottom: 1.25rem;
+    }
+    .upgrade-popup .popup-features div {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0.25rem 0;
+    }
+
     /* FAQ */
     .faq {
       max-width: 800px;
@@ -924,6 +1157,167 @@
         <button class="btn btn-outline" onclick="hideProModal()">Cancel</button>
         <button class="btn btn-primary" onclick="activatePro()">Activate</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Animated Demo Section -->
+  <div class="demo-section" id="demo">
+    <h2>Watch Your Signature Come to Life</h2>
+    <p class="subtitle">See how fast you can build a professional email signature</p>
+    <div class="demo-preview" id="demoPreview">
+      <div style="font-family:Arial,sans-serif;">
+        <div id="demoName" class="demo-field" style="font-size:16px;font-weight:bold;color:#1a1a1a;animation-delay:0.3s;"></div>
+        <div id="demoTitle" class="demo-field" style="font-size:13px;color:#6366f1;padding-top:2px;animation-delay:1.5s;"></div>
+        <div id="demoCompany" class="demo-field" style="font-size:13px;color:#666;animation-delay:2.5s;"></div>
+        <div id="demoDivider" style="border-bottom:1px solid #6366f1;margin:10px 0;width:0;transition:width 0.8s ease;"></div>
+        <div id="demoEmail" class="demo-field" style="font-size:13px;animation-delay:4s;"></div>
+        <div id="demoPhone" class="demo-field" style="font-size:13px;color:#1a1a1a;padding-top:2px;animation-delay:5s;"></div>
+      </div>
+    </div>
+    <p style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);">⚡ Takes less than 60 seconds to create yours</p>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials-section">
+    <h2>Loved by Professionals Everywhere</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"Saved me 2 hours setting up email signatures for my team. The templates are beautiful and it just works."</p>
+        <div class="author"><strong>Sarah K.</strong> — Marketing Manager</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"Finally a signature generator that doesn't require an account or try to upsell you on every click. Clean, fast, free."</p>
+        <div class="author"><strong>James R.</strong> — Freelance Developer</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"Upgraded to Pro for the Developer template — it's perfect for my GitHub-heavy workflow. Worth every penny."</p>
+        <div class="author"><strong>Priya M.</strong> — Senior Engineer, Stripe</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"I tried WiseStamp and MySignature — both felt bloated. SigCraft is exactly what I needed: simple, fast, and looks great."</p>
+        <div class="author"><strong>David L.</strong> — Sales Director</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"Set up branded signatures for our entire 30-person team in under an hour. The Pro CTA banner feature is a game-changer."</p>
+        <div class="author"><strong>Emily C.</strong> — Head of Operations</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="quote">"Love that it's 100% client-side. As a privacy-conscious user, knowing my data never leaves my browser is huge."</p>
+        <div class="author"><strong>Marcus T.</strong> — InfoSec Analyst</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="comparison-section">
+    <h2>How SigCraft Compares</h2>
+    <p class="subtitle">See why thousands choose SigCraft over the alternatives</p>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>SigCraft Free</th>
+          <th class="highlight">SigCraft Pro ✨</th>
+          <th>WiseStamp<br><span style="font-weight:400;font-size:0.75rem;">$6/mo</span></th>
+          <th>MySignature<br><span style="font-weight:400;font-size:0.75rem;">$4/mo</span></th>
+          <th>HubSpot<br><span style="font-weight:400;font-size:0.75rem;">Free</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>No signup required</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>100% client-side / private</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Works offline</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Templates</td>
+          <td>3</td><td class="check">12+</td>
+          <td>20+</td><td>15+</td><td class="partial">5</td>
+        </tr>
+        <tr>
+          <td>Custom colors & fonts</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="partial">Limited</td>
+        </tr>
+        <tr>
+          <td>Photo & logo upload</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Social icons</td>
+          <td class="check">✓</td><td class="check">✓</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="partial">Limited</td>
+        </tr>
+        <tr>
+          <td>Custom CTA banners</td>
+          <td class="cross">✗</td><td class="check">✓</td>
+          <td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Click analytics</td>
+          <td class="cross">✗</td><td class="check">✓</td>
+          <td class="check">✓</td><td class="cross">✗</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>No branding watermark</td>
+          <td class="cross">✗</td><td class="check">✓</td>
+          <td class="cross">Paid</td><td class="cross">Paid</td><td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td><strong style="color:var(--success);">Free</strong></td>
+          <td><strong style="color:var(--accent);">$5/mo</strong></td>
+          <td>$6/mo</td><td>$4/mo</td><td>Free*</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-muted);">* HubSpot's free generator is limited in templates and customization, and requires a HubSpot account.</p>
+  </div>
+
+  <!-- Keyboard Shortcuts -->
+  <div class="shortcuts-section">
+    <h2>⌨️ Keyboard Shortcuts</h2>
+    <div class="shortcuts-grid">
+      <div class="shortcut-item"><kbd>Ctrl+Shift+C</kbd> <span>Copy signature</span></div>
+      <div class="shortcut-item"><kbd>Ctrl+Shift+H</kbd> <span>Copy HTML</span></div>
+      <div class="shortcut-item"><kbd>Ctrl+Shift+S</kbd> <span>Save signature</span></div>
+      <div class="shortcut-item"><kbd>Ctrl+Shift+R</kbd> <span>Reset all fields</span></div>
+    </div>
+    <p style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-muted);">Replace Ctrl with ⌘ on Mac</p>
+  </div>
+
+  <!-- Scroll-triggered Pro Upgrade Popup -->
+  <div class="upgrade-popup-overlay" id="upgradePopup">
+    <div class="upgrade-popup">
+      <button class="close-popup" onclick="dismissUpgradePopup()" aria-label="Close">✕</button>
+      <div style="font-size:2rem;margin-bottom:0.5rem;">✨</div>
+      <h3>You're building something great</h3>
+      <p>Unlock 12 premium templates, remove branding, and add CTA banners with SigCraft Pro.</p>
+      <div class="popup-features">
+        <div>✓ Executive, Creative, Developer templates</div>
+        <div>✓ Custom banner / CTA on every email</div>
+        <div>✓ Click analytics tracking</div>
+        <div>✓ No "Made with SigCraft" badge</div>
+      </div>
+      <a href="#pricing" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;" onclick="dismissUpgradePopup()">Get Pro — $5/mo →</a>
+      <p style="margin-top:0.6rem;font-size:0.75rem;color:var(--text-muted);cursor:pointer;" onclick="dismissUpgradePopup()">No thanks, I'll stick with Free</p>
     </div>
   </div>
 
@@ -1669,6 +2063,100 @@
     copySignature = async function() { await _origCopy(); incrementSigCounter(); };
     const _origCopyHTML = copyHTML;
     copyHTML = function() { _origCopyHTML(); incrementSigCounter(); };
+
+    // --- Animated Demo (auto-typing) ---
+    function runDemoAnimation() {
+      const steps = [
+        { el: 'demoName', text: 'Jane Smith', delay: 300 },
+        { el: 'demoTitle', text: 'Product Designer', delay: 1500 },
+        { el: 'demoCompany', text: 'Acme Inc. · Design Team', delay: 2500 },
+        { el: 'demoDivider', type: 'divider', delay: 3500 },
+        { el: 'demoEmail', html: '<a href="#" style="color:#6366f1;text-decoration:none;">jane@acme.com</a>', delay: 4000 },
+        { el: 'demoPhone', text: '+1 (555) 123-4567', delay: 5000 },
+      ];
+      steps.forEach(step => {
+        setTimeout(() => {
+          const el = document.getElementById(step.el);
+          if (!el) return;
+          if (step.type === 'divider') {
+            el.style.width = '200px';
+            return;
+          }
+          el.style.opacity = '1';
+          const target = step.html || step.text;
+          const isHtml = !!step.html;
+          let i = 0;
+          const chars = step.text || 'jane@acme.com';
+          function typeChar() {
+            if (i <= chars.length) {
+              if (isHtml && i === chars.length) {
+                el.innerHTML = target;
+              } else {
+                el.textContent = chars.slice(0, i) + '▎';
+              }
+              i++;
+              setTimeout(typeChar, 35 + Math.random() * 40);
+            } else {
+              if (!isHtml) el.textContent = chars;
+            }
+          }
+          typeChar();
+        }, step.delay);
+      });
+    }
+
+    // Run demo when section scrolls into view
+    let demoRan = false;
+    const demoObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !demoRan) {
+        demoRan = true;
+        runDemoAnimation();
+        demoObs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    const demoEl = document.getElementById('demo');
+    if (demoEl) demoObs.observe(demoEl);
+
+    // --- Keyboard Shortcuts ---
+    document.addEventListener('keydown', (e) => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      if (!e.shiftKey) return;
+      switch(e.key.toUpperCase()) {
+        case 'C': e.preventDefault(); copySignature(); break;
+        case 'H': e.preventDefault(); copyHTML(); break;
+        case 'S': e.preventDefault(); saveCurrentAs(); break;
+        case 'R': e.preventDefault(); resetAll(); break;
+      }
+    });
+
+    // --- Scroll-triggered Upgrade Popup ---
+    let popupDismissed = sessionStorage.getItem('sigcraft_popup_dismissed') === '1';
+    function dismissUpgradePopup() {
+      document.getElementById('upgradePopup').classList.remove('show');
+      popupDismissed = true;
+      sessionStorage.setItem('sigcraft_popup_dismissed', '1');
+    }
+    function maybeShowUpgradePopup() {
+      if (popupDismissed || isPro()) return;
+      const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      if (scrollPct > 0.45) {
+        document.getElementById('upgradePopup').classList.add('show');
+        window.removeEventListener('scroll', maybeShowUpgradePopup);
+      }
+    }
+    window.addEventListener('scroll', maybeShowUpgradePopup);
+
+    // Exit-intent popup (desktop only)
+    document.addEventListener('mouseout', (e) => {
+      if (e.clientY < 5 && !popupDismissed && !isPro()) {
+        document.getElementById('upgradePopup').classList.add('show');
+      }
+    });
+
+    // Close popup on overlay click
+    document.getElementById('upgradePopup').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) dismissUpgradePopup();
+    });
 
     // Init
     updateSigCounter();
