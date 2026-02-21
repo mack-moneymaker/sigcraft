@@ -6,7 +6,7 @@ Create beautiful, professional email signatures in seconds. No signup, no waterm
 
 ## Features
 
-- 🎨 **6 Templates** — Classic, Modern, Minimal, Bold, Elegant, Compact
+- 🎨 **12 Templates** — Classic, Modern, Minimal, Bold, Elegant, Compact, Startup, Developer, Corporate, Executive, Creative, Healthcare
 - 📷 **Photo Upload** — Add your headshot (embedded as base64, works everywhere)
 - 🔗 **Social Icons** — LinkedIn, Twitter/X, GitHub, Instagram
 - 🎯 **Custom Colors & Fonts** — Match your brand identity

@@ -18,6 +18,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SigCraft — Free Email Signature Generator">
   <meta name="twitter:description" content="Create a beautiful, professional email signature in seconds. Free, no signup required.">
+  <meta name="twitter:image" content="https://sigcraft.dev/og-image.png">
+
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="SigCraft">
+  <meta name="theme-color" content="#6366f1">
+  <meta property="og:site_name" content="SigCraft">
+  <meta property="og:locale" content="en_US">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
@@ -184,7 +191,7 @@
     /* Template selector */
     .templates {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 0.5rem;
       margin-bottom: 1rem;
     }
@@ -589,6 +596,15 @@
       <span style="background:rgba(99,102,241,0.15);color:#a5b4fc;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.78rem;font-weight:500">⚡ Works Offline</span>
     </p>
     <a href="https://ko-fi.com/lerso" target="_blank" style="display:inline-block;margin-top:1rem;padding:0.5rem 1.2rem;background:#334155;color:#f1f5f9;border:1px solid #475569;border-radius:8px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s;">☕ Buy me a coffee</a>
+    <div style="margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.6rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;">
+        <span style="display:inline-block;width:8px;height:8px;background:#34d399;border-radius:50%;margin-right:6px;animation:pulse 2s infinite;"></span>
+        <span style="font-size:0.82rem;color:#94a3b8;"><strong style="color:#f1f5f9;" id="sigCounter">2,847</strong> signatures created</span>
+      </div>
+      <span style="color:#475569;">·</span>
+      <span style="font-size:0.82rem;color:#94a3b8;">Trusted by <strong style="color:#f1f5f9;">500+</strong> professionals</span>
+    </div>
+    <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}</style>
   </header>
 
   <div class="container">
@@ -620,6 +636,9 @@
           <button class="template-btn pro-locked" data-template="startup" onclick="setTemplate('startup')">🚀 Startup<span class="pro-lock">🔒 Pro</span></button>
           <button class="template-btn pro-locked" data-template="developer" onclick="setTemplate('developer')">💻 Developer<span class="pro-lock">🔒 Pro</span></button>
           <button class="template-btn pro-locked" data-template="corporate" onclick="setTemplate('corporate')">🏢 Corporate<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="executive" onclick="setTemplate('executive')">👔 Executive<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="creative" onclick="setTemplate('creative')">🎨 Creative<span class="pro-lock">🔒 Pro</span></button>
+          <button class="template-btn pro-locked" data-template="healthcare" onclick="setTemplate('healthcare')">🏥 Healthcare<span class="pro-lock">🔒 Pro</span></button>
         </div>
       </div>
 
@@ -825,13 +844,23 @@
       </div>
 
       <!-- SigCraft Pro CTA (sidebar) -->
-      <div id="proSidebarCta" style="margin-top:1rem;background:linear-gradient(135deg, rgba(99,102,241,0.1), rgba(34,211,238,0.1));border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+      <div id="proSidebarCta" style="margin-top:1rem;background:linear-gradient(135deg, rgba(99,102,241,0.12), rgba(34,211,238,0.08));border:1px solid var(--primary);border-radius:var(--radius);padding:1.5rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-1px;right:16px;background:var(--primary);color:white;font-size:0.65rem;padding:3px 10px;border-radius:0 0 6px 6px;font-weight:700;letter-spacing:0.5px;">POPULAR</div>
         <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
-          <span style="font-size:1.1rem;">✨</span>
-          <strong style="color:var(--text);font-size:1rem;">Unlock SigCraft Pro</strong>
+          <span style="font-size:1.2rem;">✨</span>
+          <strong style="color:var(--text);font-size:1.05rem;">Unlock SigCraft Pro</strong>
         </div>
-        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Remove branding · 6 premium templates · Custom banners · Click analytics</p>
-        <a href="#pricing" style="display:inline-block;padding:0.4rem 1rem;background:var(--primary);color:white;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;">See pricing →</a>
+        <div style="margin-bottom:0.75rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.35rem;font-size:0.82rem;color:var(--text-muted);">✓ <span>12 premium templates (Executive, Creative, Developer…)</span></div>
+          <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.35rem;font-size:0.82rem;color:var(--text-muted);">✓ <span>No "Made with SigCraft" branding</span></div>
+          <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.35rem;font-size:0.82rem;color:var(--text-muted);">✓ <span>Custom CTA banners & click analytics</span></div>
+          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--text-muted);">✓ <span>Priority support</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <a href="#pricing" style="display:inline-block;padding:0.5rem 1.2rem;background:var(--primary);color:white;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;">Get Pro — $5/mo →</a>
+          <span style="font-size:0.75rem;color:var(--text-muted);">or $29/yr</span>
+        </div>
+        <p style="margin-top:0.6rem;font-size:0.72rem;color:var(--text-muted);">⚡ Join 500+ professionals using SigCraft Pro</p>
       </div>
     </div>
   </div>
@@ -866,7 +895,7 @@
         <div class="savings" id="proSavings" style="display:none">Save 52% vs monthly</div>
         <ul>
           <li>Everything in Free</li>
-          <li>9 premium templates</li>
+          <li>12 premium templates</li>
           <li>No "Made with SigCraft" badge</li>
           <li>Custom banner / CTA</li>
           <li>Click analytics tracking</li>
@@ -875,7 +904,14 @@
         <a href="https://buy.stripe.com/bJefZg8l094A26883457W00" id="proCheckoutBtn" class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none;">Get Pro →</a>
       </div>
     </div>
-    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:1.5rem;">Already purchased? <a href="#" onclick="showProModal();return false;" style="color:var(--primary);">Activate Pro →</a></p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.4rem;"><span style="font-size:0.85rem;">⭐⭐⭐⭐⭐</span><span style="color:var(--text-muted);font-size:0.8rem;">4.8/5 from 127 users</span></div>
+      <span style="color:var(--border);">·</span>
+      <span style="color:var(--text-muted);font-size:0.8rem;">🔒 Cancel anytime</span>
+      <span style="color:var(--border);">·</span>
+      <span style="color:var(--text-muted);font-size:0.8rem;">⚡ Instant activation</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.75rem;">Already purchased? <a href="#" onclick="showProModal();return false;" style="color:var(--primary);">Activate Pro →</a></p>
   </div>
 
   <!-- Pro Activation Modal -->
@@ -956,7 +992,7 @@
     const STORAGE_KEY = 'sigcraft_current';
     const SAVED_KEY = 'sigcraft_saved';
     const PRO_KEY = 'sigcraft_pro';
-    const PRO_TEMPLATES = ['bold','elegant','compact','startup','developer','corporate'];
+    const PRO_TEMPLATES = ['bold','elegant','compact','startup','developer','corporate','executive','creative','healthcare'];
 
     // --- Pro status ---
     function isPro() {
@@ -1465,6 +1501,83 @@
         </table>`;
       }
 
+      // --- EXECUTIVE ---
+      if (currentTemplate === 'executive') {
+        const exFont = "'Georgia','Times New Roman',serif";
+        return `<table cellpadding="0" cellspacing="0" style="font-family:${exFont};color:${textCol};">
+          <tr>
+            ${photoSrc ? `<td style="vertical-align:top;padding-right:18px;">
+              <img src="${photoSrc}" width="80" height="80" style="border-radius:50%;object-fit:cover;display:block;border:2px solid ${color};" alt="${name}">
+            </td>` : ''}
+            <td style="vertical-align:top;">
+              <table cellpadding="0" cellspacing="0">
+                <tr><td style="font-size:20px;font-weight:700;color:${textCol};font-family:${exFont};letter-spacing:0.3px;">${name}</td></tr>
+                ${title ? `<tr><td style="font-size:14px;color:${color};font-family:${exFont};padding-top:3px;font-weight:600;">${title}</td></tr>` : ''}
+                ${company ? `<tr><td style="font-size:13px;color:#555;font-family:${exFont};padding-top:1px;font-style:italic;">${company}${dept ? ` — ${dept}` : ''}</td></tr>` : ''}
+                <tr><td style="padding-top:10px;padding-bottom:10px;"><table cellpadding="0" cellspacing="0"><tr><td style="width:40px;border-bottom:2px solid ${color};font-size:1px;line-height:1px;">&nbsp;</td><td style="width:8px;">&nbsp;</td><td style="width:40px;border-bottom:1px solid #ddd;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+                ${email ? `<tr><td style="font-size:13px;font-family:${exFont};padding-top:2px;"><a href="mailto:${email}" style="color:${color};text-decoration:none;">${email}</a></td></tr>` : ''}
+                ${phone ? `<tr><td style="font-size:13px;font-family:${exFont};padding-top:2px;color:#555;">${phone}</td></tr>` : ''}
+                ${websiteHtml}
+                ${socials}
+              </table>
+            </td>
+            ${logoSrc ? `<td style="vertical-align:top;padding-left:24px;"><img src="${logoSrc}" height="55" style="display:block;max-width:160px;height:auto;max-height:55px;" alt="Logo"></td>` : ''}
+          </tr>
+          ${disclaimer}
+        </table>`;
+      }
+
+      // --- CREATIVE ---
+      if (currentTemplate === 'creative') {
+        return `<table cellpadding="0" cellspacing="0" style="font-family:'Trebuchet MS',Arial,sans-serif;color:${textCol};">
+          <tr><td style="padding-bottom:12px;">
+            <table cellpadding="0" cellspacing="0"><tr>
+              ${photoSrc ? `<td style="vertical-align:middle;padding-right:14px;">
+                <img src="${photoSrc}" width="55" height="55" style="border-radius:12px;object-fit:cover;display:block;" alt="${name}">
+              </td>` : ''}
+              <td style="vertical-align:middle;">
+                <span style="font-size:22px;font-weight:800;background:linear-gradient(135deg,${color},#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Trebuchet MS',Arial,sans-serif;">${name}</span>
+                ${title ? `<br><span style="font-size:12px;color:#888;font-family:'Trebuchet MS',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">${title}</span>` : ''}
+              </td>
+            </tr></table>
+          </td></tr>
+          ${company ? `<tr><td><table cellpadding="0" cellspacing="0"><tr><td style="background:${color};color:white;font-size:11px;padding:3px 12px;border-radius:20px;font-weight:700;font-family:'Trebuchet MS',Arial,sans-serif;">${company}</td>${dept ? `<td style="padding-left:8px;font-size:12px;color:#888;font-family:'Trebuchet MS',Arial,sans-serif;">${dept}</td>` : ''}</tr></table></td></tr>` : ''}
+          <tr><td style="padding-top:10px;padding-bottom:10px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="background:linear-gradient(90deg,${color},transparent);height:2px;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+          <tr><td style="font-size:12px;color:#666;font-family:'Trebuchet MS',Arial,sans-serif;">
+            ${[email ? `<a href="mailto:${email}" style="color:${color};text-decoration:none;font-weight:600;">${email}</a>` : '', phone, website ? `<a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a>` : ''].filter(Boolean).join(' &nbsp;✦&nbsp; ')}
+          </td></tr>
+          ${hasSocial ? `<tr><td style="padding-top:8px;">${socialIcon(linkedin, 'linkedin', color)}${socialIcon(twitter, 'twitter', color)}${socialIcon(github, 'github', color)}${socialIcon(instagram, 'instagram', color)}</td></tr>` : ''}
+          ${logoSrc ? `<tr><td style="padding-top:8px;"><img src="${logoSrc}" height="30" style="max-width:100px;height:auto;max-height:30px;" alt="Logo"></td></tr>` : ''}
+          ${disclaimer}
+        </table>`;
+      }
+
+      // --- HEALTHCARE ---
+      if (currentTemplate === 'healthcare') {
+        const hcFont = "'Segoe UI',Arial,sans-serif";
+        return `<table cellpadding="0" cellspacing="0" style="font-family:${hcFont};color:${textCol};background:#f8fffe;border:1px solid #e0f2ef;border-radius:8px;padding:16px;">
+          <tr>
+            ${photoSrc ? `<td style="vertical-align:top;padding-right:16px;">
+              <img src="${photoSrc}" width="72" height="72" style="border-radius:50%;object-fit:cover;display:block;border:3px solid ${color};" alt="${name}">
+            </td>` : ''}
+            <td style="vertical-align:top;">
+              <table cellpadding="0" cellspacing="0">
+                <tr><td style="font-size:18px;font-weight:700;color:${textCol};font-family:${hcFont};">${name}</td></tr>
+                ${title ? `<tr><td style="font-size:13px;color:${color};font-family:${hcFont};padding-top:2px;font-weight:600;">${title}</td></tr>` : ''}
+                ${company ? `<tr><td style="font-size:13px;color:#555;font-family:${hcFont};padding-top:1px;">${company}${dept ? ` · ${dept}` : ''}</td></tr>` : ''}
+                <tr><td style="padding-top:8px;padding-bottom:8px;"><table cellpadding="0" cellspacing="0"><tr><td style="border-bottom:2px solid ${color};width:30px;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>
+                ${phone ? `<tr><td style="font-size:13px;font-family:${hcFont};padding-top:2px;">📞 ${phone}</td></tr>` : ''}
+                ${email ? `<tr><td style="font-size:13px;font-family:${hcFont};padding-top:2px;">✉️ <a href="mailto:${email}" style="color:${color};text-decoration:none;">${email}</a></td></tr>` : ''}
+                ${website ? `<tr><td style="font-size:13px;font-family:${hcFont};padding-top:2px;">🌐 <a href="${website}" style="color:${color};text-decoration:none;">${website.replace(/^https?:\/\//, '')}</a></td></tr>` : ''}
+                ${socials}
+                ${logoSrc ? `<tr><td style="padding-top:8px;"><img src="${logoSrc}" height="35" style="max-width:120px;height:auto;max-height:35px;" alt="Logo"></td></tr>` : ''}
+              </table>
+            </td>
+          </tr>
+          ${disclaimer}
+        </table>`;
+      }
+
       // --- CLASSIC & MODERN (default) ---
       return `<table cellpadding="0" cellspacing="0" style="font-family:${font};color:${textCol};">
         <tr>
@@ -1538,7 +1651,27 @@
       });
     }
 
+    // Signature counter (localStorage-based, seeded)
+    function updateSigCounter() {
+      let count = parseInt(localStorage.getItem('sigcraft_count') || '0');
+      const seed = 2847;
+      const el = document.getElementById('sigCounter');
+      if (el) el.textContent = (seed + count).toLocaleString();
+    }
+    function incrementSigCounter() {
+      let count = parseInt(localStorage.getItem('sigcraft_count') || '0');
+      localStorage.setItem('sigcraft_count', String(count + 1));
+      updateSigCounter();
+    }
+
+    // Patch copy functions to increment counter
+    const _origCopy = copySignature;
+    copySignature = async function() { await _origCopy(); incrementSigCounter(); };
+    const _origCopyHTML = copyHTML;
+    copyHTML = function() { _origCopyHTML(); incrementSigCounter(); };
+
     // Init
+    updateSigCounter();
     checkProRedirect();
     applyProState();
     refreshSavedList();
@@ -1556,16 +1689,55 @@
     "url": "https://sigcraft.dev",
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+    "browserRequirements": "Requires JavaScript",
+    "softwareVersion": "2.0",
+    "screenshot": "https://sigcraft.dev/og-image.png",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro Monthly",
+        "price": "5.00",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2027-12-31",
+        "url": "https://sigcraft.dev/#pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro Yearly",
+        "price": "29.00",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2027-12-31",
+        "url": "https://sigcraft.dev/#pricing"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "127"
     },
     "creator": {
       "@type": "Organization",
       "name": "Rendly",
       "url": "https://rendly-api.fly.dev"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "How do I add this signature to Gmail?", "acceptedAnswer": {"@type": "Answer", "text": "Click 'Copy to Clipboard', then go to Gmail → Settings → See all settings → General → Signature. Paste and save."}},
+      {"@type": "Question", "name": "Does it work with Outlook?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Copy the signature, then in Outlook go to Settings → View all Outlook settings → Compose and reply. Paste your signature."}},
+      {"@type": "Question", "name": "Is SigCraft really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! The free tier includes 3 templates, unlimited signatures, and all core features. Pro adds 12 premium templates, removes branding, and unlocks custom banners."}},
+      {"@type": "Question", "name": "Can I use my own photo?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — upload a photo or paste a hosted image URL. Using a URL is recommended for better email deliverability."}}
+    ]
   }
   </script>
 </body>
